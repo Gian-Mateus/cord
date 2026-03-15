@@ -1,6 +1,6 @@
 <?php
 
-namespace Cord\src\Bases;
+namespace Cord\Bases;
 
 use Livewire\Component;
 
