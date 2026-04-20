@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Gianmds\\Cord\\": "src/"
+            "Cord\\": "src/"
         }
     },
     "authors": [
@@ -31,13 +31,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Vendor\\PackageName\\Tests\\": "tests/"
+            "Cord\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Vendor\\PackageName\\PackageNameServiceProvider"
+                "Cord\\Providers\\CordServiceProvider"
             ]
         }
     },

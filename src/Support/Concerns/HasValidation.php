@@ -5,7 +5,6 @@ namespace Cord\Support\Concerns;
 use Closure;
 
 /**
- * @method static required(bool|\Closure $condition = true)
  * @method static nullable()
  * @method static string()
  * @method static integer()
@@ -58,11 +57,19 @@ trait HasValidation
 
     // --- API pública ---
 
+    // Aceita uma regra individual com condição
+    public function rule(string|object $rule, bool|Closure $condition = true): static
+    {
+        $this->rules[] = ['rule' => $rule, 'condition' => $condition];
+
+        return $this;
+    }
+
     // Aceita array de regras — strings ou objetos Rule
     public function rules(array $rules, bool|Closure $condition = true): static
     {
         foreach ($rules as $rule) {
-            $this->rules[] = ['rule' => $rule, 'condition' => $condition];
+            $this->rule($rule, $condition);
         }
 
         return $this;
@@ -71,32 +78,38 @@ trait HasValidation
     // required() tem tratamento especial pois suporta condição
     public function required(bool|Closure $condition = true): static
     {
-        $this->rules[] = ['rule' => 'required', 'condition' => $condition];
-
-        return $this;
+        return $this->rule('required', $condition);
     }
 
     // nullable() sem condição — semântica diferente de required
     public function nullable(): static
     {
-        return $this->rules(['nullable']);
+        return $this->rule('nullable');
     }
 
     // Regras com semântica específica que o __call() não resolveria bem
     public function unique(string $table, string $column = 'NULL'): static
     {
-        return $this->rules(["unique:{$table},{$column}"]);
+        return $this->rule("unique:{$table},{$column}");
     }
 
     public function exists(string $table, string $column = 'id'): static
     {
-        return $this->rules(["exists:{$table},{$column}"]);
+        return $this->rule("exists:{$table},{$column}");
     }
 
-    // Mensagem customizada por regra
+    // Mensagem customizada por regra (singular)
     public function validationMessage(string $rule, string $message): static
     {
         $this->messages[$rule] = $message;
+
+        return $this;
+    }
+
+    // Mensagens customizadas por array
+    public function validationMessages(array $messages): static
+    {
+        $this->messages = array_merge($this->messages, $messages);
 
         return $this;
     }
@@ -129,11 +142,10 @@ trait HasValidation
 
     public function __call(string $name, array $arguments): static
     {
-
-        /** 
+        /**
          * Ver uma forma de usar o validator do laravel para verificar se a regra é válida para não gerar um erro silêncioso de regra inexistente.
-         * 
-        */
+         *
+         */
 
         // Converte camelCase para snake_case
         // minDigits(8) → 'min_digits:8'
@@ -147,6 +159,6 @@ trait HasValidation
             $rule = "{$rule}:{$params}";
         }
 
-        return $this->rules([$rule]);
+        return $this->rule($rule);
     }
 }

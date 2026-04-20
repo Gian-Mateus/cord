@@ -1,6 +1,6 @@
 <?php
 
-use Tests\TestCase;
+use Cord\Tests\TestCase;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ use Tests\TestCase;
 |
 */
 
-uses(TestCase::class)->in('Unit');
+uses(TestCase::class)->in('Unit', 'Feature');
 
 /*
 |--------------------------------------------------------------------------

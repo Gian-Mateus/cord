@@ -1,3 +1,3 @@
-<button {{ $attributes->merge($getExtraAttibutes()) }}>
-    {{ $getLabel() }}
+<button {{ $attributes }}>
+    {{ $component->getLabel() }}
 </button>
