@@ -2,7 +2,7 @@
 
 namespace Cord\Tables\Concerns;
 
-use Cord\Tables\Table;
+use Cord\Components\Tables\Table;
 
 /**
  * Trait para componentes Livewire que gerenciam tabelas.

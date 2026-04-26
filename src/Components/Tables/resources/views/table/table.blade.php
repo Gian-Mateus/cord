@@ -1,5 +1,5 @@
 @php
-    /** @var \Cord\Tables\Table $table */
+    /** @var \Cord\Components\Tables\Table $table */
     $columns = $table->getColumns();
     $actions = $table->getActions();
     $bulkActions = $table->getBulkActions();
