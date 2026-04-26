@@ -3,6 +3,7 @@
 namespace Cord\Context;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Model;
 
 class PanelContext
@@ -85,7 +86,7 @@ class PanelContext
 
         $cacheKey = $ability.':'.serialize($arguments);
 
-        return $this->abilities[$cacheKey] ??= $this->user->can($ability, ...$arguments);
+        return $this->abilities[$cacheKey] ??= Gate::forUser($this->user)->check($ability, $arguments);
     }
 
     public function cannot(string $ability, mixed ...$arguments): bool
