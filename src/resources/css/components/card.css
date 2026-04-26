@@ -1,6 +1,0 @@
-/* Exemplo de estilização adicional para o componente Card */
-@layer components {
-  .card-custom {
-    @apply p-6 bg-white rounded-lg shadow-md;
-  }
-}

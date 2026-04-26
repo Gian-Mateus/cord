@@ -1,18 +1,19 @@
 <?php
 
-namespace Cord\Tables;
+namespace Cord\Components\Tables;
 
 use Closure;
 use Cord\Actions\Action;
 use Cord\Support\Concerns\EvaluatesClosures;
 use Cord\Support\Concerns\HasFluentApi;
 use Cord\Tables\Columns\Column;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 
 class Table
 {
-    use HasFluentApi;
     use EvaluatesClosures;
+    use HasFluentApi;
 
     protected string $name = '';
 
@@ -241,7 +242,7 @@ class Table
 
     // --- Renderização ---
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('cord::table.table', [
             'table' => $this,
