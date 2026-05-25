@@ -1,15 +1,8 @@
 <?php
 
-use Cord\Cord;
 use Illuminate\Support\Facades\Route;
+use Cord\Pages\TestPage;
 
-foreach (Cord::getPanels() as $panel) {
-    Route::middleware($panel->getMiddleware())
-        ->prefix($panel->getPath())
-        ->name("cord.{$panel->getId()}.")
-        ->group(function () use ($panel) {
-            foreach ($panel->getDiscoveredClasses() as $class) {
-                $class::registerRoutes($panel->getPath());
-            }
-        });
-}
+Route::middleware(['web'])->group(function () {
+    Route::get('/cord-test', TestPage::class)->name('cord.test');
+});
