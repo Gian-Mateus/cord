@@ -16,17 +16,20 @@
     ],
     "require": {
         "php": "^8.2",
-        "blade-ui-kit/blade-icons": "^1.9",
-        "illuminate/support": "^11.0 || ^12.0",
+        "anousss007/blatui": "^1.13",
+        "gehrisandro/tailwind-merge-laravel": "^1.4",
         "illuminate/contracts": "^11.0|^12.0",
+        "illuminate/routing": "*",
+        "illuminate/support": "^11.0 || ^12.0",
         "livewire/livewire": "^4.0",
+        "mallardduck/blade-lucide-icons": "^1.26",
         "spatie/laravel-package-tools": "^1.16"
     },
-    "require-dev": {
-        "orchestra/testbench": "^8.0 || ^9.0",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/phpstan": "^1.10",
+        "require-dev": {
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+        "pestphp/pest": "^2.0 || ^3.0 || ^4.0",
+        "pestphp/pest-plugin-laravel": "^2.0 || ^3.0 || ^4.0",
+        "phpstan/phpstan": "^1.10 || ^2.0",
         "laravel/pint": "^1.13"
     },
     "autoload-dev": {
@@ -49,5 +52,9 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+    "artisan": "vendor/bin/testbench",
+    "test": "vendor/bin/pest"
+}
 }
