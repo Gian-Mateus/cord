@@ -31,7 +31,7 @@ $field = TextInput::make([
 
 //  COMO FAZER NA CORD (Instanciação limpa e Fluent API)
 $field = TextInput::build()
-    ->name('email')
+    ->bind('email')
     ->label('Endereço de E-mail')
     ->required();
 ```
@@ -171,17 +171,17 @@ namespace Cord\Support\Abstracts;
 
 abstract class Field extends Component
 {
-    protected string $name;
+    protected string $bind;
     protected ?string $label = null;
     protected mixed $defaultValue = null;
 
-    public function name(string $name): static
+    public function bind(string $bind): static
     {
-        $this->name = $name;
+        $this->bind = $bind;
         
         // Auto-label: Se o label não estiver definido, gera a partir do nome
         if (empty($this->label)) {
-            $this->label = str($name)->replace('_', ' ')->title()->toString();
+            $this->label = str($bind)->replace('_', ' ')->title()->toString();
         }
 
         return $this;
@@ -199,9 +199,9 @@ abstract class Field extends Component
         return $this;
     }
 
-    public function getName(): string
+    public function getBind(): string
     {
-        return $this->name;
+        return $this->bind;
     }
 
     public function getLabel(): string
